@@ -137,3 +137,6 @@ chmod 600 ~/.ssh/*
 
 chmod 700 ~/.kube
 chmod 600 ~/.kube/*
+
+#eliminar archivos macOS
+#find ~/workspace \( -name '.DS_Store' -o -name '._*' -o -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.AppleDB' -o -name '.AppleDesktop' \) -exec rm -rf {} +
