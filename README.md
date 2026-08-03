@@ -1,0 +1,2 @@
+# ubuntu
+Setup para ubuntu
