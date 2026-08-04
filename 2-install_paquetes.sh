@@ -56,6 +56,10 @@ gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor true
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
 
+# 6.Ocultar monitor y workspace para app
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-monitors true
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+
 echo "¡Dock centrado y configurado correctamente!"
 
 
@@ -215,6 +219,13 @@ pipx install gnome-extensions-cli
 
 #eliminar archivos macOS
 #find ~/workspace \( -name '.DS_Store' -o -name '._*' -o -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.AppleDB' -o -name '.AppleDesktop' \) -exec rm -rf {} +
+
+
+#Freelens
+curl -L https://raw.githubusercontent.com/freelensapp/freelens/refs/heads/main/freelens/build/apt/freelens.asc | sudo tee /etc/apt/keyrings/freelens.asc
+curl -L https://raw.githubusercontent.com/freelensapp/freelens/refs/heads/main/freelens/build/apt/freelens.sources | sudo tee /etc/apt/sources.list.d/freelens.sources
+sudo apt update
+sudo apt install freelens
 
 
 #Para nvidia anda bien snap, en z13 se ve chico cursor en monitor pg42UQ
