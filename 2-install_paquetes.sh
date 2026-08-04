@@ -12,8 +12,55 @@ sudo apt update -y && sudo apt upgrade -y
 # Definir modo no interactivo para apt
 export DEBIAN_FRONTEND=noninteractive
 
-#gnome:
-sudo apt-get install -y git ssh  postgresql-client meld zsh vlc git-flow p7zip-full gnome-shell-extensions chrome-gnome-shell geany mc curl unzip htop deluge powertop nmap make gcc gnome-tweaks rar unrar powerstat build-essential cpu-x gnome-system-monitor stress libfuse2 fzf flatpak direnv pkg-config pipx
+#paquetes basicos:
+sudo apt-get install -y git ssh curl unzip zsh p7zip-full make gcc rar unrar powerstat build-essential pkg-config
+
+
+
+
+echo "Aplicando configuración de pantalla y bloqueo..."
+
+# 1. Apagar pantalla a los 5 minutos (300 segundos)
+gsettings set org.gnome.desktop.session idle-delay 300
+
+# 2. Desactivar el bloqueo automático de pantalla
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+
+# 3. Retardo de bloqueo en 0 (Al apagarse la pantalla)
+gsettings set org.gnome.desktop.screensaver lock-delay 0
+
+# 4. Ocultar notificaciones en la pantalla de bloqueo
+gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+
+# 5. Desactivar el bloqueo de pantalla al suspender el equipo
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+
+echo "¡Configuración aplicada con éxito!"
+
+
+echo "Configurando Ubuntu Dock en el centro..."
+
+# 1. Centrar el Dock (Desactivar modo panel / extender a bordes)
+gsettings set org.gnome.shell.extensions.dash-to-dock always-center-icons true
+
+
+
+# 3. Tamaño de iconos a 40px
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
+
+# 4. Posición abajo y en todos los monitores
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor true
+
+# 5. Ocultar dispositivos montados, de red y papelera
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+
+echo "¡Dock centrado y configurado correctamente!"
+
+
+
+
 
 
 # 1. Navegadores, VS Code y LM Studio
@@ -58,6 +105,8 @@ fi
 # -----------------------------------------------------------------------------
 sudo apt update -y
 
+
+
 # -----------------------------------------------------------------------------
 # Instalar paquetes
 # -----------------------------------------------------------------------------
@@ -69,10 +118,12 @@ sudo apt install -y \
 
 
 
+#paquetes complementarios:
+sudo apt-get install -y postgresql-client meld vlc git-flow gnome-shell-extensions chrome-gnome-shell geany mc  htop deluge powertop nmap gnome-tweaks cpu-x gnome-system-monitor stress libfuse2 fzf flatpak direnv pipx
 
 
 
-sudo snap install zapzap
+
 
 
 echo "paquetes flatpak"
@@ -162,60 +213,13 @@ pipx ensurepath
 pipx install gnome-extensions-cli
 
 
-
-
-echo "Aplicando configuración de pantalla y bloqueo..."
-
-# 1. Apagar pantalla a los 5 minutos (300 segundos)
-gsettings set org.gnome.desktop.session idle-delay 300
-
-# 2. Desactivar el bloqueo automático de pantalla
-gsettings set org.gnome.desktop.screensaver lock-enabled false
-
-# 3. Retardo de bloqueo en 0 (Al apagarse la pantalla)
-gsettings set org.gnome.desktop.screensaver lock-delay 0
-
-# 4. Ocultar notificaciones en la pantalla de bloqueo
-gsettings set org.gnome.desktop.notifications show-in-lock-screen false
-
-# 5. Desactivar el bloqueo de pantalla al suspender el equipo
-gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
-
-echo "¡Configuración aplicada con éxito!"
-
-
-echo "Configurando Ubuntu Dock en el centro..."
-
-# 1. Centrar el Dock (Desactivar modo panel / extender a bordes)
-gsettings set org.gnome.shell.extensions.dash-to-dock always-center-icons true
-
-
-
-# 3. Tamaño de iconos a 40px
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
-
-# 4. Posición abajo y en todos los monitores
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
-gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor true
-
-# 5. Ocultar dispositivos montados, de red y papelera
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
-gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
-
-echo "¡Dock centrado y configurado correctamente!"
-
-
-
-#Backup configuración ptyxis
-#dconf dump /org/gnome/Ptyxis/ > ptyxis_backup.ini
-
-#Restaurar configuración ptyxis
-dconf load /org/gnome/Ptyxis/ < ptyxis_backup.ini
-
-
-
 #eliminar archivos macOS
 #find ~/workspace \( -name '.DS_Store' -o -name '._*' -o -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.AppleDB' -o -name '.AppleDesktop' \) -exec rm -rf {} +
+
+
+#Para nvidia anda bien snap, en z13 se ve chico cursor en monitor pg42UQ
+sudo snap install zapzap
+
 
 
 echo "--> Instalando Tailscale..."

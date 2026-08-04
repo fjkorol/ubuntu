@@ -12,6 +12,9 @@ set -e
 # tray icon
 # https://extensions.gnome.org/extension/615/appindicator-support/ 
 
+#Vitals - extensión para ver el estado de la cpu, memoria, etc
+https://extensions.gnome.org/extension/1460/vitals/
+
 
 
 gext install 5949 5090 615 1460

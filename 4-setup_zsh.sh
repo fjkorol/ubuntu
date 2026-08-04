@@ -100,3 +100,10 @@ echo "p10k configure"
 echo
 echo "Configura tu terminal para usar la fuente:"
 echo "MesloLGS NF"
+
+
+#Backup configuración ptyxis
+#dconf dump /org/gnome/Ptyxis/ > ptyxis_backup.ini
+
+#Restaurar configuración ptyxis
+dconf load /org/gnome/Ptyxis/ < ptyxis_backup.ini
