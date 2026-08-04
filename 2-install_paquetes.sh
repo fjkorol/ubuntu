@@ -1,9 +1,19 @@
+#!/bin/bash
+set -e
+
+#habilitar pegar click central
+gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+
+
+#actualizacion inicial
+sudo apt update -y && sudo apt upgrade -y
+
 # Add Docker's official GPG key:
 # Definir modo no interactivo para apt
 export DEBIAN_FRONTEND=noninteractive
 
 #gnome:
-sudo apt-get install -y git ssh  postgresql-client meld zsh vlc git-flow p7zip-full gnome-shell-extensions chrome-gnome-shell geany mc gimp curl unzip htop deluge powertop nmap make gcc fonts-powerline gnome-tweaks ubuntu-restricted-extras rar unrar powerstat build-essential cpu-x gnome-system-monitor stress libfuse2 fzf fontconfig flatpak direnv pkg-config
+sudo apt-get install -y git ssh  postgresql-client meld zsh vlc git-flow p7zip-full gnome-shell-extensions chrome-gnome-shell geany mc curl unzip htop deluge powertop nmap make gcc gnome-tweaks rar unrar powerstat build-essential cpu-x gnome-system-monitor stress libfuse2 fzf flatpak direnv pkg-config pipx
 
 
 # 1. Navegadores, VS Code y LM Studio
@@ -46,21 +56,23 @@ fi
 # -----------------------------------------------------------------------------
 # Actualizar repositorios
 # -----------------------------------------------------------------------------
-sudo apt update
+sudo apt update -y
 
 # -----------------------------------------------------------------------------
 # Instalar paquetes
 # -----------------------------------------------------------------------------
 sudo apt install -y \
     google-chrome-stable \
+    google-chrome-beta \
     code \
     opera-stable
 
 
 
 
-#Pentaho / Spoon
-sudo apt install -y openjdk-11-jdk
+
+
+sudo snap install zapzap
 
 
 echo "paquetes flatpak"
@@ -73,7 +85,6 @@ org.pgadmin.pgadmin4 \
 info.febvre.Komikku \
 com.vivaldi.Vivaldi \
 net.waterfox.waterfox \
-com.rtosta.zapzap \
 org.telegram.desktop \
 com.obsproject.Studio \
 org.zotero.Zotero
@@ -96,6 +107,9 @@ if ! dpkg -s lmstudio >/dev/null 2>&1; then
 
     rm -f "$TMP_DEB"
 fi
+
+#FIX icono LM Studio
+sudo sed -i 's|^Icon=lm-studio$|Icon=/opt/LM-Studio/resources/icon.ico|' /usr/share/applications/lm-studio.desktop
 
 
 git config --global credential.helper store
@@ -128,15 +142,81 @@ sudo apt update -y
 
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+sudo gpasswd -a $USER docker
 
-echo "Permisos a .kube y .ssh"
 
 
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/*
 
-chmod 700 ~/.kube
-chmod 600 ~/.kube/*
+#EXTENSIONES de GNOME
+# OSK keyboard virtual GNOME:
+# https://extensions.gnome.org/extension/5949/gjs-osk/
+
+# reorder workspace
+# https://extensions.gnome.org/extension/5090/space-bar/
+
+# tray icon
+# https://extensions.gnome.org/extension/615/appindicator-support/ 
+
+
+pipx ensurepath
+pipx install gnome-extensions-cli
+
+
+
+
+echo "Aplicando configuración de pantalla y bloqueo..."
+
+# 1. Apagar pantalla a los 5 minutos (300 segundos)
+gsettings set org.gnome.desktop.session idle-delay 300
+
+# 2. Desactivar el bloqueo automático de pantalla
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+
+# 3. Retardo de bloqueo en 0 (Al apagarse la pantalla)
+gsettings set org.gnome.desktop.screensaver lock-delay 0
+
+# 4. Ocultar notificaciones en la pantalla de bloqueo
+gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+
+# 5. Desactivar el bloqueo de pantalla al suspender el equipo
+gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
+
+echo "¡Configuración aplicada con éxito!"
+
+
+echo "Configurando Ubuntu Dock en el centro..."
+
+# 1. Centrar el Dock (Desactivar modo panel / extender a bordes)
+gsettings set org.gnome.shell.extensions.dash-to-dock always-center-icons true
+
+
+
+# 3. Tamaño de iconos a 40px
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
+
+# 4. Posición abajo y en todos los monitores
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor true
+
+# 5. Ocultar dispositivos montados, de red y papelera
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+
+echo "¡Dock centrado y configurado correctamente!"
+
+
+
+#Backup configuración ptyxis
+#dconf dump /org/gnome/Ptyxis/ > ptyxis_backup.ini
+
+#Restaurar configuración ptyxis
+dconf load /org/gnome/Ptyxis/ < ptyxis_backup.ini
+
+
 
 #eliminar archivos macOS
 #find ~/workspace \( -name '.DS_Store' -o -name '._*' -o -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.AppleDB' -o -name '.AppleDesktop' \) -exec rm -rf {} +
+
+
+echo "--> Instalando Tailscale..."
+curl -fsSL https://tailscale.com/install.sh | sh

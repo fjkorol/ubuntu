@@ -11,6 +11,8 @@ sudo apt install -y \
     curl \
     fzf \
     fontconfig
+    
+#VER ESTO FALLABA    sudo apt-get install -y fontconfig fonts-powerline
 
 echo "---- Dependencias instaladas ----"
 

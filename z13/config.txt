@@ -1,0 +1,10 @@
+sudo nano /etc/default/grub
+
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 amdgpu.dcdebugmask=0x610"
+
+### OLD, 
+###GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 amdgpu.dcdebugmask=0x600"
+
+
+sudo update-grub
