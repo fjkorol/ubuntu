@@ -228,8 +228,34 @@ sudo apt update
 sudo apt install freelens
 
 
+
+
+#Revisar y actualizar periodicamente NODE
+#https://nodejs.org/en/download
+
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+# Download and install Node.js:
+nvm install 24
+# Verify the Node.js version:
+node -v # Should print "v24.19.0".
+# Verify npm version:
+npm -v # Should print "11.17.0".
+
+
+#qwen code terminal
+curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen-standalone.sh | bash
+
+
 #Para nvidia anda bien snap, en z13 se ve chico cursor en monitor pg42UQ
-sudo snap install zapzap
+#sudo snap install zapzap
+
+#Para AMD, tipo z13 o framework
+flatpak install -y flathub com.rtosta.zapzap
+flatpak override --user --filesystem=home com.rtosta.zapzap
+
 
 
 

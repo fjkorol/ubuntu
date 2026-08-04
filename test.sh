@@ -1,21 +1,16 @@
 #!/bin/bash
 
-echo "Configurando Ubuntu Dock en el centro..."
 
-# 1. Centrar el Dock (Desactivar modo panel / extender a bordes)
-gsettings set org.gnome.shell.extensions.dash-to-dock always-center-icons true
+#Revisar y actualizar periodicamente NODE
+#https://nodejs.org/en/download
 
-
-
-# 3. Tamaño de iconos a 40px
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
-
-# 4. Posición abajo y en todos los monitores
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
-gsettings set org.gnome.shell.extensions.dash-to-dock multi-monitor true
-
-# 5. Ocultar dispositivos montados, de red y papelera
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
-gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
-
-echo "¡Dock centrado y configurado correctamente!"
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+# Download and install Node.js:
+nvm install 24
+# Verify the Node.js version:
+node -v # Should print "v24.19.0".
+# Verify npm version:
+npm -v # Should print "11.17.0".
