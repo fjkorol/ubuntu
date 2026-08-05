@@ -142,6 +142,7 @@ com.vivaldi.Vivaldi \
 net.waterfox.waterfox \
 org.telegram.desktop \
 com.obsproject.Studio \
+io.github.chidiwilliams.Buzz \
 org.zotero.Zotero
 
 
