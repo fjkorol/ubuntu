@@ -18,21 +18,21 @@ set -e
 
 
 
-gnome-extensions install 5949 5090 615 1460
-gnome-extensions enable 5949 5090 615 1460
+gext install 5949 5090 615 1460
+gext enable 5949 5090 615 1460
 
 
 
 sudo apt install -y gimp ubuntu-restricted-extras
 
 
-# sudo apt install -y \
-#     links \
-#     ansible \
-#     imagemagick \
-#     gettext \
-#     php-cli \
-#     gimp \
+sudo apt install -y \
+    links \
+    ansible \
+    imagemagick \
+    gettext \
+    php-cli \
+    gimp \
 
 #Pentaho / Spoon
-#sudo apt install -y openjdk-11-jdk
+sudo apt install -y openjdk-11-jdk
