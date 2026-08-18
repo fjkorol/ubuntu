@@ -17,6 +17,7 @@ sudo apt-get install -y git ssh curl unzip zsh p7zip-full make gcc rar unrar pow
 
 
 
+#mover dir personal a workspace
 
 rm -rf "$HOME/Documents"
 rm -rf "$HOME/Downloads"
@@ -298,6 +299,26 @@ flatpak install -y flathub com.rtosta.zapzap
 flatpak override --user --filesystem=home com.rtosta.zapzap
 
 
+
+#Syncthing INI
+# Añadir la clave GPG oficial de Syncthing
+sudo mkdir -p /etc/apt/keyrings
+sudo curl -L -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+
+# Agregar el repositorio estable
+echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+
+# Actualizar e instalar
+sudo apt update
+sudo apt install syncthing -y
+
+# Habilitar el servicio para tu usuario actual
+systemctl --user enable syncthing.service
+systemctl --user start syncthing.service
+
+#syncthing web
+#http://localhost:8384
+#Syncthing FIN
 
 
 echo "--> Instalando Tailscale..."
