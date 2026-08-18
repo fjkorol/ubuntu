@@ -18,6 +18,46 @@ sudo apt-get install -y git ssh curl unzip zsh p7zip-full make gcc rar unrar pow
 
 
 
+rm -rf "$HOME/Documents"
+rm -rf "$HOME/Downloads"
+rm -rf "$HOME/Pictures"
+rm -rf "$HOME/Videos"
+rm -rf "$HOME/Music"
+rm -rf "$HOME/Templates"
+rm -rf "$HOME/Public"
+rm -rf "$HOME/Desktop"
+
+
+ln -s "$HOME/workspace/personal/Documents" "$HOME/Documents"
+ln -s "$HOME/workspace/personal/Downloads" "$HOME/Downloads"
+ln -s "$HOME/workspace/personal/Pictures" "$HOME/Pictures"
+ln -s "$HOME/workspace/personal/Videos" "$HOME/Videos"
+ln -s "$HOME/workspace/personal/Music" "$HOME/Music"
+ln -s "$HOME/workspace/personal/Templates" "$HOME/Templates"
+ln -s "$HOME/workspace/personal/Public" "$HOME/Public"
+ln -s "$HOME/workspace/personal/Desktop" "$HOME/Desktop"
+
+
+# Definir variables de ruta
+ORIGEN="/home/fer/workspace/original/ubuntu/personal/.config/user-dirs.dirs"
+DESTINO="$HOME/.config/user-dirs.dirs"
+
+# Comprobar si el archivo de origen existe
+if [ -f "$ORIGEN" ]; then
+    # Crear el directorio de destino si no existe
+    mkdir -p "$HOME/.config"
+    
+    # Copiar y reemplazar el archivo
+    cp "$ORIGEN" "$DESTINO"
+    echo "Archivo copiado y reemplazado con éxito en $DESTINO"
+else
+    echo "Error: El archivo de origen no existe en $ORIGEN"
+fi
+
+xdg-user-dirs-update
+
+
+
 echo "Aplicando configuración de pantalla y bloqueo..."
 
 # 1. Apagar pantalla a los 5 minutos (300 segundos)
