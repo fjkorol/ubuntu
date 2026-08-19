@@ -16,9 +16,16 @@ set -e
 #Vitals - extensión para ver el estado de la cpu, memoria, etc
 #https://extensions.gnome.org/extension/1460/vitals/
 
+sudo apt update
+sudo apt install -y pipx
+pipx ensurepath
+pipx install gnome-ext-cli
+
+source ~/.zshrc
 
 
 gext install 5949 5090 615 1460
+
 gext enable 5949 5090 615 1460
 
 
@@ -32,7 +39,7 @@ sudo apt install -y \
     imagemagick \
     gettext \
     php-cli \
-    gimp \
-
+    gimp 
+    
 #Pentaho / Spoon
 sudo apt install -y openjdk-11-jdk
