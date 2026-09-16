@@ -1,4 +1,6 @@
-tailscale:
+#!/bin/bash
+
+#tailscale:
 sudo tailscale up
 tailscale configure systray --enable-startup=systemd
 systemctl --user daemon-reload

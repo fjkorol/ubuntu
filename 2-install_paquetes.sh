@@ -40,7 +40,7 @@ ln -s "$HOME/workspace/personal/Desktop" "$HOME/Desktop"
 
 
 # Definir variables de ruta
-ORIGEN="/home/fer/workspace/original/ubuntu/personal/.config/user-dirs.dirs"
+ORIGEN="/home/fer/workspace/github/ubuntu/personal/.config/user-dirs.dirs"
 DESTINO="$HOME/.config/user-dirs.dirs"
 
 # Comprobar si el archivo de origen existe
@@ -164,7 +164,7 @@ sudo apt install -y \
 
 
 #paquetes complementarios:
-sudo apt-get install -y postgresql-client meld vlc git-flow gnome-shell-extensions chrome-gnome-shell geany mc  htop deluge powertop nmap gnome-tweaks cpu-x gnome-system-monitor stress libfuse2 fzf flatpak direnv pipx
+sudo apt-get install -y postgresql-client meld vlc git-flow gnome-shell-extensions chrome-gnome-shell geany mc  htop deluge powertop nmap gnome-tweaks cpu-x gnome-system-monitor stress libfuse2 fzf flatpak direnv pipx python3-pip
 
 
 
@@ -183,7 +183,6 @@ com.vivaldi.Vivaldi \
 net.waterfox.waterfox \
 org.telegram.desktop \
 com.obsproject.Studio \
-io.github.chidiwilliams.Buzz \
 org.zotero.Zotero
 
 
@@ -206,7 +205,7 @@ if ! dpkg -s lmstudio >/dev/null 2>&1; then
 fi
 
 #FIX icono LM Studio
-sudo sed -i 's|^Icon=lm-studio$|Icon=/opt/LM-Studio/resources/icon.ico|' /usr/share/applications/lm-studio.desktop
+#sudo sed -i 's|^Icon=lm-studio$|Icon=/opt/LM-Studio/resources/icon.ico|' /usr/share/applications/lm-studio.desktop
 
 
 git config --global credential.helper store
